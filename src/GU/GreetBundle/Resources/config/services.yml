@@ -1,0 +1,45 @@
+parameters:
+    # repositories
+    greet_repository.class:       GU\GreetBundle\Repository\GreetRepository
+    greet_repository.factory_argument: 'GreetBundle:Greet'
+
+    rsvp_repository.class:        GU\GreetBundle\Repository\RSVPRepository
+    rsvp_repository.factory_argument:  'GreetBundle:RSVP'
+
+    # services
+    greet_service.class:          GU\GreetBundle\Service\GreetService
+    rsvp_service.class:           GU\GreetBundle\Service\RSVPService
+
+    # hydrators
+    greet_criteria_hydrator.class: GU\GreetBundle\Hydrator\GreetCriteriaHydrator
+    
+services:
+    # services
+    gu.greet_service:
+        class: %greet_service.class%
+        arguments:
+          - '@gu.greet_repository'
+
+    gu.rsvp_service:
+        class: %rsvp_service.class%
+        arguments:
+          - '@gu.rsvp_repository'
+
+    # repositories
+    gu.greet_repository:
+        class: %greet_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %greet_repository.factory_argument%
+
+    gu.rsvp_repository:
+        class: %rsvp_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %rsvp_repository.factory_argument%
+
+    # hydrators
+    gu.greet_criteria_hydrator:
+        class: %greet_criteria_hydrator.class%
+        arguments:
+          - '@fos_user.user_manager'

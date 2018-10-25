@@ -1,0 +1,60 @@
+parameters:
+    # repositories
+    gang_repository.class:       GU\GangBundle\Repository\GangRepository
+    gang_repository.factory_argument: 'GangBundle:Gang'
+
+    join_request_repository.class: GU\GangBundle\Repository\JoinRequestRepoistory
+    join_request_repository.factory_argument: 'GangBundle:JoinRequest'
+
+    gang_user_repository.class: GU\GangBundle\Repository\GangUserRepository
+    gang_user_repository.factory_argument: 'GangBundle:GangUser'
+
+    # services
+    gang_service.class:          GU\GangBundle\Service\GangService
+    join_request_service.class:  GU\GangBundle\Service\JoinRequestService
+    gang_user_service.class:     GU\GangBundle\Service\GangUserService
+
+    # specifications
+    can_view_gang_specification.class: GU\GangBundle\Specification\CanViewGang
+
+services:
+    # services
+    gu.gang_service:
+        class: %gang_service.class%
+        arguments:
+          - '@gu.gang_repository'
+
+    gu.join_request_service:
+        class: %join_request_service.class%
+        arguments:
+        - '@gu.join_request_repository'
+
+    gu.gang_user_service:
+        class: %gang_user_service.class%
+        arguments:
+          - '@gu.gang_user_repository'
+
+    # specifications
+    gu.can_view_gang_specification:
+        class: %can_view_gang_specification.class%
+        arguments:
+        - '@security.token_storage'
+
+    # repositories
+    gu.gang_repository:
+        class: %gang_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %gang_repository.factory_argument%
+
+    gu.join_request_repository:
+        class: %join_request_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+        - %join_request_repository.factory_argument%
+
+    gu.gang_user_repository:
+        class: %gang_user_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %gang_user_repository.factory_argument%

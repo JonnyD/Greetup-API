@@ -1,0 +1,15 @@
+elite_fifa.show_world_league:
+    path: /world-league
+    defaults: { _controller: AssociationBundle:Association:showWorld }
+
+elite_fifa.admin_create_association:
+    path: /admin/association/create
+    defaults: { _controller: AssociationBundle:AdminAssociation:create }
+
+elite_fifa.admin_show_association:
+    path: /admin/association/{slug}
+    defaults: { _controller: AssociationBundle:AdminAssociation:show }
+
+elite_fifa.admin_list_association:
+    path: /admin/association
+    defaults: { _controller: AssociationBundle:AdminAssociation:list }

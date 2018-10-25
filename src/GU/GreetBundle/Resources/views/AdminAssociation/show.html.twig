@@ -1,0 +1,20 @@
+{{ association.name }} <br/>
+
+Current Season <br />
+{% if latestSeason != null %}
+    {{ latestSeason.number }} {{ latestSeason.status }}<br />
+    {% if latestSeason.status == constant('EliteFifa\\SeasonBundle\\Enum\\SeasonStatus::IN_PROGRESS') %}
+        <a href="{{ path('elite_fifa.admin_end_season', {'id': latestSeason.id }) }}">
+            end</a> <br />
+    {% elseif latestSeason.status == constant('EliteFifa\\SeasonBundle\\Enum\\SeasonStatus::FINISHED') %}
+
+    {% endif %}
+{% endif %}
+<br />
+
+Competitions <a href="{{ path('elite_fifa.admin_create_competition', {'associationSlug': association.slug }) }}">
+    create</a> <br />
+{% for season in association.seasons %}
+    <a href="{{ path('elite_fifa.admin_show_season', {'id': season.id }) }}">
+        {{ season.number }}</a> <br />
+{% endfor %}

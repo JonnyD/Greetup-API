@@ -1,0 +1,10 @@
+{% extends 'EliteFifaBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {{ association.name }} <br />
+
+    {% for competition in association.competitions %}
+        <a href="{{ path('elite_fifa.show_league', {'slug': competition.slug }) }}">
+            {{ competition.name }}</a> <br />
+    {% endfor %}
+{% endblock %}

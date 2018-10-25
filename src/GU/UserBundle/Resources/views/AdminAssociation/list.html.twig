@@ -1,0 +1,4 @@
+{% for association in associations %}
+    <a href="{{ path('elite_fifa.admin_show_association', {'slug': association.slug }) }}">
+        {{ association.name }}</a> <br />
+{% endfor %}

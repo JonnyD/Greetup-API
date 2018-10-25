@@ -1,0 +1,21 @@
+users:
+    resource: "@UserBundle/Controller/API"
+    type:     rest
+    prefix: /api
+
+greets:
+    resource: "@GreetBundle/Controller/"
+    type:     rest
+    prefix: /api
+
+gangs:
+    resource: "@GangBundle/Controller/API"
+    type:     rest
+    prefix: /api
+
+api_login_check:
+    path: /api/login_check
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
